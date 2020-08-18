@@ -1,0 +1,24 @@
+@font-face {
+  font-family: 'SFBold';
+  src: url('FontsFree-Net-SFProText-Bold.ttf');
+}
+
+@font-face {
+  font-family: 'SF';
+  src: url('FontsFree-Net-SFProText-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'SFItalic';
+  src: url('FontsFree-Net-SFProText-RegularItalic.ttf');
+}
+
+@font-face {
+  font-family: 'SFLight';
+  src: url('FontsFree-Net-SFProText-Light-1.ttf');
+}
+
+@font-face {
+  font-family: 'SFHeavy';
+  src: url('FontsFree-Net-SFProText-Heavy.ttf');
+}

@@ -1,0 +1,130 @@
+html,
+body {
+  margin: 0;
+  font-family: SF, sans-serif;
+  font-size: 16px;
+  color: white;
+}
+
+.container {
+  padding: 0 40px;
+  max-width: 1347px;
+  margin: 0 auto;
+}
+
+.font-bold {
+  font-family: SFBold, sans-serif;
+}
+
+.font-italic {
+  font-family: SFItalic, sans-serif;
+}
+
+.font-light {
+  font-family: SFLight, sans-serif;
+}
+
+.font-heavy {
+  font-family: SFHeavy, sans-serif;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.justify-content-space-between {
+  justify-content: space-between;
+}
+
+.flex-direction-column {
+  flex-direction: column;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.h-100 {
+  height: 100%;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.my-1 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.mb-30 {
+  margin-bottom: 30px;
+}
+
+.mr-1 {
+  margin-right: 1rem;
+}
+
+.ml-1 {
+  margin-left: 1rem;
+}
+
+.p-1 {
+  padding: 1rem;
+}
+
+.color-black {
+  background-color: black;
+}
+
+.btn {
+  cursor: pointer;
+  outline: none;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  background-color: transparent;
+  padding: 0;
+
+  &.small {
+    font-size: 16px;
+    height: 47px;
+    padding: 0 15px 0 12.5px;
+  }
+
+  &.large {
+    height: 61px;
+    padding: 0 33px;
+    font-size: 18px;
+    font-family: SFBold, sans-serif;
+  }
+
+  &.underline {
+    border-radius: 0;
+    letter-spacing: 0.1px;
+    border-bottom: 2px solid #7f7f7f;
+    line-height: 14px;
+  }
+
+  &.btn-dark {
+    background-color: #0b0b0b;
+  }
+
+  &.btn-red {
+    background-color: #ae0000;
+  }
+
+  &.btn-close {
+    font-size: 25px;
+    margin-left: 21px;
+    line-height: 0;
+  }
+}
