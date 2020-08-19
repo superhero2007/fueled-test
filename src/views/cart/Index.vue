@@ -1,6 +1,6 @@
 <template>
   <div class="cart">
-    <Header v-bind:carts="this.$store.getters.items.length" />
+    <Header />
     <div class="content">
       <div class="container">
         <div class="top d-flex justify-content-space-between align-center">
@@ -80,11 +80,16 @@ export default {
     Header,
     ProductTable
   },
-  data: () => {
+  data() {
     return {
       title: "Your Cart",
       tax: 0
     };
+  },
+  async mounted() {
+    // spinner enable
+    await this.setItems();
+    // spinner disable
   },
   computed: {
     totalPrice() {
@@ -103,6 +108,14 @@ export default {
       itemsApi
         .setItems(this.$store.getters.items)
         .then(res => console.log(res.msg));
+    },
+    setItems() {
+      itemsApi
+        .getItems()
+        .then(res => {
+          this.$store.commit("setItems", res.data);
+        })
+        .catch(err => console.log(err));
     }
   }
 };

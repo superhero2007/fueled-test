@@ -5,30 +5,25 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   state: {
-    items: [],
-    editingRow: Number
+    items: []
   },
   mutations: {
     setItems(state, items) {
       state.items = items;
     },
-    updateItems(state, item) {
-      state.items = state.items.map((itm, index) => {
-        if (index === state.editingRow) {
-          return item;
+    updateItems(state, updatedItem) {
+      state.items = state.items.map(item => {
+        if (updatedItem.id === item.id) {
+          return updatedItem;
         }
-        return itm;
+        return item;
       });
     },
     deleteItem(state, id) {
       state.items = state.items.filter(item => item.id !== id);
-    },
-    setEditingRow(state, id) {
-      state.editingRow = id;
     }
   },
   getters: {
-    items: state => state.items,
-    editingRow: state => state.editingRow
+    items: state => state.items
   }
 });

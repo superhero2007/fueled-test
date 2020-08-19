@@ -9,7 +9,7 @@
       </div>
       <div class="cart-info">
         <span>Cart</span>
-        <Badge v-bind:badge="carts" />
+        <Badge v-bind:badge="this.$store.getters.items.length" />
       </div>
     </div>
   </div>
@@ -19,14 +19,9 @@
 import Badge from "./Badge.vue";
 
 export default {
-  name: "app-header",
+  name: "Header",
   components: {
     Badge
-  },
-  data: () => {
-    return {
-      carts: 3
-    };
   }
 };
 </script>

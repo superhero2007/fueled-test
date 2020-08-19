@@ -2,10 +2,10 @@
   <div class="product-table">
     <div class="thead d-flex">
       <div
-          v-for="(field, index) of fields"
-          class="th"
-          :class="'col-' + index"
-          :key="index"
+        v-for="(field, index) of fields"
+        class="th"
+        :class="'col-' + index"
+        :key="index"
       >
         <span class="th-text" v-if="field !== 'Image'">
           {{ field }}
@@ -18,25 +18,26 @@
           <img class="item-image" :src="item.image" alt="product-image" />
         </div>
         <div class="td col-1">
-          <span class="item-name">{{ item.name }}</span><br/>
+          <span class="item-name">{{ item.name }}</span
+          ><br />
           <span class="item-id">{{ item.id }}</span>
         </div>
         <div class="td col-2">
-          <input type="number" v-if="editingRow === index" v-model="price" />
+          <input type="number" v-if="editingRow === index" v-model="updatedItem.price" />
           <span class="item-price" v-else>${{ formatPrice(item.price) }}</span>
         </div>
         <div class="td col-3 d-flex align-center item-quantity">
-          <input type="number" v-if="editingRow === index" v-model="quantity" />
+          <input type="number" v-if="editingRow === index" v-model="updatedItem.quantity" />
           <div
-              v-else
-              class="notification d-flex justify-content-center align-center"
+            v-else
+            class="notification d-flex justify-content-center align-center"
           >
             <span>{{ item.quantity }}</span>
           </div>
           <a
-              class="btn underline"
-              v-if="editingRow === index"
-              v-on:click="updateItem"
+            class="btn underline"
+            v-if="editingRow === index"
+            v-on:click="updateItem"
           >
             done
           </a>
@@ -56,22 +57,18 @@
 
 <script>
 import numeral from "numeral";
-import itemsApi from "../../../services/api/Items";
 
 export default {
   name: "ProductTable",
-  data: function() {
+  data() {
     return {
+      fields: ["Image", "Product Name", "Price", "Quantity", "Remove"],
+      editingRow: Number,
       updatedItem: {
-        price: 0,
-        quantity: 0
-      },
-      fields: ["Image", "Product Name", "Price", "Quantity", "Remove"]
+        price: "",
+        quantity: ""
+      }
     };
-  },
-  async mounted() {
-    this.items = await this.getItems();
-    this.editingRow = -1;
   },
   methods: {
     formatPrice(price) {
@@ -80,15 +77,15 @@ export default {
     updateItem() {
       this.$store.commit("updateItems", {
         ...this.items[this.editingRow],
-        price: this.validation(this.updatedItem.price),
-        quantity: this.validation(this.updatedItem.quantity)
+        price: this.validation(parseFloat(this.updatedItem.price)),
+        quantity: this.validation(parseInt(this.updatedItem.quantity))
       });
-      this.$store.commit("setEditingRow", -1);
+      this.editingRow = -1;
     },
     editItem(id) {
       this.updatedItem.price = this.items[id].price;
       this.updatedItem.quantity = this.items[id].quantity;
-      this.$store.commit("setEditingRow", id);
+      this.editingRow = id;
     },
     deleteItem(id) {
       this.$store.commit("deleteItem", id);
@@ -96,15 +93,6 @@ export default {
     validation(value) {
       if (value.length === 0 || isNaN(value)) value = 0;
       return value;
-    },
-    getItems() {
-      return itemsApi
-          .getItems()
-          .then(res => {
-            this.$store.commit("setItems", res.data);
-            return res.data;
-          })
-          .catch(err => console.log(err));
     }
   },
   computed: {
@@ -114,30 +102,6 @@ export default {
       },
       set: function(val) {
         return val;
-      }
-    },
-    editingRow: {
-      get: function() {
-        return this.$store.getters.editingRow;
-      },
-      set: function(val) {
-        return val;
-      }
-    },
-    price: {
-      get: function() {
-        return this.items[this.$store.getters.editingRow].price;
-      },
-      set: function(price) {
-        this.updatedItem.price = parseFloat(price);
-      }
-    },
-    quantity: {
-      get: function() {
-        return this.items[this.$store.getters.editingRow].quantity;
-      },
-      set: function(quantity) {
-        this.updatedItem.quantity = parseInt(quantity);
       }
     }
   }
